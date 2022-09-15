@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import "./MovieGrid.scss"
 import MovieCard from "../movieCard/MovieCard"
-import Button, { OutlineButton } from "../button/Button"
+import { OutlineButton } from "../button/Button"
 import Input from "../input/Input"
 import tmdbApi, { category, movieType, tvType } from "../../api/tmdbApi"
 
@@ -10,24 +10,27 @@ const MovieGrid = (props) => {
   const [items, setItems] = useState([])
   const [page, setPage] = useState(1)
   const [totalPage, setTotalPage] = useState(0)
-  const { keyword } = useParams
+  const { keyword } = useParams()
 
   useEffect(() => {
     const getList = async () => {
       let response = null
-      if (keyword !== undefined) {
+      if (keyword === undefined) {
+        const params = {}
+        switch (props.category) {
+          case category.movie:
+            response = await tmdbApi.getMovieList(movieType.upcoming, {
+              params,
+            })
+            break
+          default:
+            response = await tmdbApi.getTvList(tvType.popular, { params })
+        }
+      } else {
         const params = {
           query: keyword,
         }
         response = await tmdbApi.search(props.category, { params })
-      }
-      const params = {}
-      switch (props.category) {
-        case category.movie:
-          response = await tmdbApi.getMovieList(movieType.upcoming, { params })
-          break
-        default:
-          response = await tmdbApi.getTvList(tvType.popular, { params })
       }
       setItems(response.results)
       setTotalPage(response.total_pages)
@@ -37,20 +40,21 @@ const MovieGrid = (props) => {
 
   const loadMore = async () => {
     let response = null
-    if (keyword !== undefined) {
+    if (keyword === undefined) {
+      const params = { page: page + 1 }
+      switch (props.category) {
+        case category.movie:
+          response = await tmdbApi.getMovieList(movieType.upcoming, { params })
+          break
+        default:
+          response = await tmdbApi.getTvList(tvType.popular, { params })
+      }
+    } else {
       const params = {
         page: page + 1,
         query: keyword,
       }
       response = await tmdbApi.search(props.category, { params })
-    }
-    const params = { page: page + 1 }
-    switch (props.category) {
-      case category.movie:
-        response = await tmdbApi.getMovieList(movieType.upcoming, { params })
-        break
-      default:
-        response = await tmdbApi.getTvList(tvType.popular, { params })
     }
     setItems([...items, ...response.results])
     setPage(page + 1)
@@ -105,9 +109,6 @@ const MovieSearch = (props) => {
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
       />
-      <Button className="small" onClick={goToSearch}>
-        Search
-      </Button>
     </div>
   )
 }
