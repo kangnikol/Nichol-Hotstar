@@ -4,7 +4,12 @@ import "./MovieGrid.scss"
 import MovieCard from "../movieCard/MovieCard"
 import { OutlineButton } from "../button/Button"
 import Input from "../input/Input"
-import tmdbApi, { category, movieType, tvType } from "../../api/tmdbApi"
+import tmdbApi, {
+  category,
+  movieType,
+  tvType,
+  kidsType,
+} from "../../api/tmdbApi"
 
 const MovieGrid = (props) => {
   const [items, setItems] = useState([])
@@ -20,6 +25,11 @@ const MovieGrid = (props) => {
         switch (props.category) {
           case category.movie:
             response = await tmdbApi.getMovieList(movieType.upcoming, {
+              params,
+            })
+            break
+          case category.kids:
+            response = await tmdbApi.getKidsList(kidsType.popular, {
               params,
             })
             break

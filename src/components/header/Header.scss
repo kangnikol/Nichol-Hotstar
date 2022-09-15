@@ -15,6 +15,13 @@
   }
 }
 
+.kids {
+  @include flex(center, unset);
+  img {
+    height: 28px;
+  }
+}
+
 .header {
   background-color: $body-bg;
   height: $header-height;

@@ -3,6 +3,7 @@ import axiosClient from "./axiosClient"
 export const category = {
   movie: "movie",
   tv: "tv",
+  kids: "kids",
 }
 
 export const movieType = {
@@ -17,6 +18,12 @@ export const tvType = {
   on_the_air: "on_the_air",
 }
 
+export const kidsType = {
+  popular: "popular",
+  top_rated: "top_rated",
+  on_the_air: "on_the_air",
+}
+
 const tmdbApi = {
   getMovieList: (type, params) => {
     const url = "movie/" + movieType[type]
@@ -24,6 +31,10 @@ const tmdbApi = {
   },
   getTvList: (type, params) => {
     const url = "tv/" + tvType[type]
+    return axiosClient.get(url, params)
+  },
+  getKidsList: (type, params) => {
+    const url = "movie/" + kidsType[type]
     return axiosClient.get(url, params)
   },
   getVideos: (cate, id) => {
