@@ -88,8 +88,9 @@
 }
 
 .casts {
+  padding-top: 1rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   gap: 10px;
 
   &-item {
@@ -97,6 +98,7 @@
       padding-top: 160px;
       background-size: cover;
       margin-bottom: 0.5rem;
+      border-radius: $border-radius;
     }
 
     &-name {

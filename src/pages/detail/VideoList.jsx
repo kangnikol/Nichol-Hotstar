@@ -27,7 +27,7 @@ const Video = (props) => {
   useEffect(() => {
     const height = (iframeRef.current.offsetWitdh * 9) / 16 + "px"
     iframeRef.current.setAttribute("height", height)
-  })
+  }, [])
   return (
     <div className="video">
       <div className="video-title">
