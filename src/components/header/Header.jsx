@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react"
 import { Link, useLocation } from "react-router-dom"
-import "./Header.scss"
+// import "./Header.scss"
 import logo from "../../assets/logo1.png"
 import kids from "../../assets/kids.png"
 
@@ -53,13 +53,13 @@ const Header = () => {
 
   return (
     <div ref={headerRef} className="header">
-      <div className="header-wrap">
+      <div className="header-wrap flex">
         <div className="logo">
           <Link to="/">
             <img src={logo} alt="logo" />
           </Link>
         </div>
-        <ul className="header-nav">
+        <ul className="header-nav text-white flex flex-row items-center mr-8">
           {headerNav.map((e, i) => (
             <li key={i} className={`${i === active ? "active" : ""}`}>
               <Link to={e.path}>{e.display}</Link>

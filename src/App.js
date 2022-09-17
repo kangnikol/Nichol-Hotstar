@@ -1,4 +1,4 @@
-import "./App.scss"
+import "./App.css"
 import "swiper/scss"
 import { BrowserRouter, Route } from "react-router-dom"
 import Header from "./components/header/Header"
@@ -11,9 +11,11 @@ function App() {
       <Route
         render={(props) => (
           <>
-            <Header {...props} />
-            <Routes />
-            <Footer />
+            <div className="bg-gray-900">
+              <Header {...props} />
+              <Routes />
+              <Footer />
+            </div>
           </>
         )}
       />

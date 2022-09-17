@@ -1,7 +1,7 @@
 import React from "react"
 import propTypes from "prop-types"
 
-import "./Button.scss"
+// import "./Button.scss"
 
 const Button = (props) => {
   return (
@@ -17,7 +17,7 @@ const Button = (props) => {
 export const OutlineButton = (props) => {
   return (
     <Button
-      className={`btn-outline ${props.className}`}
+      className="text-white p-3 border-2 border-white rounded-full"
       onClick={props.onClick ? () => props.onClick() : null}
     >
       {props.children}

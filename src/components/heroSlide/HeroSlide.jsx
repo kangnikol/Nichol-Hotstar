@@ -5,7 +5,7 @@ import Modal, { ModalContent } from "../modal/Modal"
 import { Swiper, SwiperSlide } from "swiper/react"
 import tmdbApi, { category, movieType } from "../../api/tmdbApi"
 import apiConfig from "../../api/apiConfig"
-import "./HeroSlide.scss"
+// import "./HeroSlide.scss"
 import { useHistory } from "react-router-dom"
 
 const HeroSlide = () => {
@@ -28,7 +28,7 @@ const HeroSlide = () => {
   }, [])
 
   return (
-    <div className="hero-slide">
+    <div className="hero-slide mb-12">
       <Swiper
         modules={[Autoplay]}
         grabCursor={true}
@@ -72,26 +72,25 @@ const HeroSlideItem = (props) => {
     modal.classList.toggle("active")
   }
   return (
-    <div
-      className={`hero-slide-item ${props.className}`}
-      style={{ backgroundImage: `url(${background})` }}
-    >
-      <div className="hero-slide-item-content container">
-        <div className="hero-slide-item-content-info">
-          <h2 className="title">{item.title}</h2>
-          <div className="overview">{item.overview}</div>
-          <div className="btns">
-            <Button onClick={() => history.push("/movie/" + item.id)}>
-              Watch now
-            </Button>
-            <OutlineButton onClick={setModalActive}>
-              Watch Trailer
-            </OutlineButton>
+    <div className="p-8 flex justify-between">
+      <div className="card relative bg-black rounded-l-lg p-5">
+        <div className="flex justify-between items-center h-full">
+          <div className="relative w-99">
+            <h2 className="title text-5xl text-white font-semibold pb-4">
+              {item.title}
+            </h2>
+            <div className="overview text-white flex flex-warp">
+              {item.overview}
+            </div>
           </div>
         </div>
-        <div className="hero-slide-item-content-poster">
-          <img src={apiConfig.w500Image(item.poster_path)} alt="Poster" />
-        </div>
+      </div>
+      <div className="relative h-full bg-center bg-cover bg-no-repeat after:content-[''] after:top-0 after:left-0 after:absolute after:w-full after:h-full after:bg-gradient-to-r after:from-black after:to-transparent">
+        <img
+          className="rounded-r-lg h-1/4"
+          src={apiConfig.originalImage(item.backdrop_path)}
+          alt="Poster"
+        />
       </div>
     </div>
   )
