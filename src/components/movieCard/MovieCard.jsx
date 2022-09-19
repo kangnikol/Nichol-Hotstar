@@ -16,7 +16,7 @@ const MovieCard = (props) => {
           <i className="fa-solid fa-play"></i>
         </Button>
       </div>
-      <h3>{item.title || item.name}</h3>
+      <h3 className="text-white text-center">{item.title || item.name}</h3>
     </Link>
   )
 }

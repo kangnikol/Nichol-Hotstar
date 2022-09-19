@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from "react"
-import SwiperCore, { Autoplay } from "swiper"
-import Button, { OutlineButton } from "../button/Button"
+import SwiperCore, { Autoplay, Navigation } from "swiper"
 import Modal, { ModalContent } from "../modal/Modal"
 import { Swiper, SwiperSlide } from "swiper/react"
 import tmdbApi, { category, movieType } from "../../api/tmdbApi"
 import apiConfig from "../../api/apiConfig"
 // import "./HeroSlide.scss"
-import { useHistory } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 
 const HeroSlide = () => {
   SwiperCore.use([Autoplay])
@@ -29,13 +28,7 @@ const HeroSlide = () => {
 
   return (
     <div className="hero-slide mb-12">
-      <Swiper
-        modules={[Autoplay]}
-        grabCursor={true}
-        spaceBetween={0}
-        slidesPerView={1}
-        autoplay={{ delay: 5000 }}
-      >
+      <Swiper modules={[Navigation]} spaceBetween={0} slidesPerView={1}>
         {movieItems.map((item, i) => (
           <SwiperSlide key={i}>
             {({ isActive }) => (
@@ -72,10 +65,10 @@ const HeroSlideItem = (props) => {
     modal.classList.toggle("active")
   }
   return (
-    <div className="p-8 flex justify-between">
-      <div className="card relative bg-black rounded-l-lg p-5">
-        <div className="flex justify-between items-center h-full">
-          <div className="relative w-99">
+    <div className="p-12">
+      <Link to={"/movie/" + item.id}>
+        <div className="flex flex-row cursor-pointer">
+          <div className="card bg-black rounded-l-lg p-8 basis-1/2">
             <h2 className="title text-5xl text-white font-semibold pb-4">
               {item.title}
             </h2>
@@ -83,15 +76,15 @@ const HeroSlideItem = (props) => {
               {item.overview}
             </div>
           </div>
+          <div className="relative basis-1/2 h-full bg-center bg-no-repeat after:content-[''] after:top-0 after:left-0 after:absolute after:w-full after:h-full after:bg-gradient-to-r after:from-black after:to-transparent">
+            <img
+              className="rounded-r-lg"
+              src={apiConfig.originalImage(item.backdrop_path)}
+              alt="Poster"
+            />
+          </div>
         </div>
-      </div>
-      <div className="relative h-full bg-center bg-cover bg-no-repeat after:content-[''] after:top-0 after:left-0 after:absolute after:w-full after:h-full after:bg-gradient-to-r after:from-black after:to-transparent">
-        <img
-          className="rounded-r-lg h-1/4"
-          src={apiConfig.originalImage(item.backdrop_path)}
-          alt="Poster"
-        />
-      </div>
+      </Link>
     </div>
   )
 }

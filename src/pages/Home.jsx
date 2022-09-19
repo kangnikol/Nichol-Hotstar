@@ -13,7 +13,7 @@ const Home = () => {
       <HeroSlide />
       <div className="container mx-auto">
         <div className="section mb-3">
-          <div className="section-header mb-8 flex justify-between items-center">
+          <div className="section-header py-3 flex justify-between items-center">
             <h2 className="text-white text-2xl">Trending Movies</h2>
             <Link to="/movie">
               <OutlineButton className="small">View More</OutlineButton>
