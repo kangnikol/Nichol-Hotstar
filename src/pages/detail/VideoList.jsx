@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
+import { Swiper, SwiperSlide } from "swiper/react"
 import tmdbApi from "../../api/tmdbApi"
 
 const VideoList = (props) => {
@@ -27,18 +28,25 @@ const Video = (props) => {
   useEffect(() => {
     const height = (iframeRef.current.offsetWitdh * 9) / 16 + "px"
     iframeRef.current.setAttribute("height", height)
+    const width = (iframeRef.current.offsetWitdh * 9) / 16 + "px"
+    iframeRef.current.setAttribute("width", width)
   }, [])
   return (
-    <div className="video">
-      <div className="video-title">
-        <h2>{item.name}</h2>
-      </div>
-      <iframe
-        src={`https://www.youtube.com/embed/${item.key}`}
-        ref={iframeRef}
-        width="100%"
-        title="video"
-      ></iframe>
+    <div className="video mr-2">
+      <Swiper grabCursor={true} spaceBetween={10} slidesPerView={"auto"}>
+        <SwiperSlide>
+          <iframe
+            className="rounded-lg"
+            src={`https://www.youtube.com/embed/${item.key}`}
+            ref={iframeRef}
+            width="100%"
+            title="video"
+          ></iframe>
+          <div className="video-title mt-4 text-center">
+            <h2>{item.name}</h2>
+          </div>
+        </SwiperSlide>
+      </Swiper>
     </div>
   )
 }

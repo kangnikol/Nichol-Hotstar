@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react"
 import { useHistory, useParams } from "react-router-dom"
-import "./MovieGrid.scss"
+// import "./MovieGrid.scss"
 import MovieCard from "../movieCard/MovieCard"
 import { OutlineButton } from "../button/Button"
 import Input from "../input/Input"
@@ -71,16 +71,16 @@ const MovieGrid = (props) => {
   }
   return (
     <>
-      <div className="section mb-3">
+      <div className="section mb-12 container mx-auto">
         <MovieSearch category={props.category} keyword={keyword} />
       </div>
-      <div className="movie-grid">
+      <div className="container mx-auto grid grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] gap-5 mb-12">
         {items.map((item, i) => (
           <MovieCard category={props.category} item={item} key={i} />
         ))}
       </div>
       {page < totalPage ? (
-        <div className="movie-grid-loadmore">
+        <div className="text-center">
           <OutlineButton className="small" onClick={loadMore}>
             Load More
           </OutlineButton>

@@ -1,5 +1,5 @@
 import React from "react"
-import "./MovieCard.scss"
+// import "./MovieCard.scss"
 import { Link } from "react-router-dom"
 import Button from "../button/Button"
 import { category } from "../../api/tmdbApi"
@@ -11,9 +11,12 @@ const MovieCard = (props) => {
   const bg = apiConfig.w500Image(item.poster_path || item.backdrop_path)
   return (
     <Link to={link}>
-      <div className="movie-card" style={{ backgroundImage: `url(${bg})` }}>
-        <Button>
-          <i className="fa-solid fa-play"></i>
+      <div
+        className="movie-card relative bg-top bg-no-repeat pt-[160%] rounded-md mb-4 bg-cover before:content-[''] before:absolute before:top-0 before:left-0 before:bottom-0 before:right-0 before:bg-black before:opacity-0 before:[transition:opacity_0.3s_ease] hover:before:opacity-80"
+        style={{ backgroundImage: `url(${bg})` }}
+      >
+        <Button className="hover:absolute top-2/4 left-2/4 [transform:translate(-50%,_-50%)_scale(0)] [transition:transform_0.3s_ease,_shadow_0.3s_ease] hover:[transform:translate(-50%,_-50%)_scale(1)]">
+          <i className="fa-solid fa-play text-white"></i>
         </Button>
       </div>
       <h3 className="text-white text-center">{item.title || item.name}</h3>

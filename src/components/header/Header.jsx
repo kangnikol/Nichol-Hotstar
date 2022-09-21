@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from "react"
 import { Link, useLocation } from "react-router-dom"
 // import "./Header.scss"
 import logo from "../../assets/logo1.png"
-import kids from "../../assets/kids.png"
 
 const headerNav = [
   {
@@ -12,20 +11,6 @@ const headerNav = [
   {
     display: "Movies",
     path: "/movie",
-  },
-  // {
-  //   display: "Nichol+",
-  //   path: "/nicholplus",
-  // },
-  {
-    display: (
-      <>
-        <div className="kids w-20">
-          <img src={kids} alt="kids" />
-        </div>
-      </>
-    ),
-    path: "/kids",
   },
 ]
 
@@ -56,7 +41,7 @@ const Header = () => {
             <img src={logo} alt="logo" />
           </Link>
         </div>
-        <ul className="header-nav text-white flex items-center">
+        <ul className="header-nav text-gray-400 flex items-center">
           {headerNav.map((e, i) => (
             <li key={i} className="mx-4 text-lg mt-3">
               <Link to={e.path}>{e.display}</Link>
