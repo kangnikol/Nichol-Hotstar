@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
 import { Swiper, SwiperSlide } from "swiper/react"
 import tmdbApi from "../../api/tmdbApi"
+import VideoCard from "./VideoCard"
 
 const VideoList = (props) => {
   const { category } = useParams()
@@ -15,39 +16,33 @@ const VideoList = (props) => {
   }, [category, props.id])
   return (
     <>
-      {videos.map((item, i) => (
-        <Video key={i} item={item} />
-      ))}
+      <div>
+        <Swiper
+          className="hidden sm:flex"
+          grabCursor={true}
+          spaceBetween={10}
+          slidesPerView={9}
+        >
+          {videos.map((item, i) => (
+            <SwiperSlide key={i}>
+              <VideoCard item={item} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <Swiper
+          className="sm:hidden"
+          grabCursor={true}
+          spaceBetween={10}
+          slidesPerView={2}
+        >
+          {videos.map((item, i) => (
+            <SwiperSlide key={i}>
+              <VideoCard item={item} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
     </>
-  )
-}
-
-const Video = (props) => {
-  const item = props.item
-  const iframeRef = useRef(null)
-  useEffect(() => {
-    const height = (iframeRef.current.offsetWitdh * 9) / 16 + "px"
-    iframeRef.current.setAttribute("height", height)
-    const width = (iframeRef.current.offsetWitdh * 9) / 16 + "px"
-    iframeRef.current.setAttribute("width", width)
-  }, [])
-  return (
-    <div className="video mr-2">
-      <Swiper grabCursor={true} spaceBetween={10} slidesPerView={"auto"}>
-        <SwiperSlide>
-          <iframe
-            className="rounded-lg"
-            src={`https://www.youtube.com/embed/${item.key}`}
-            ref={iframeRef}
-            width="100%"
-            title="video"
-          ></iframe>
-          <div className="video-title mt-4 text-center">
-            <h2>{item.name}</h2>
-          </div>
-        </SwiperSlide>
-      </Swiper>
-    </div>
   )
 }
 

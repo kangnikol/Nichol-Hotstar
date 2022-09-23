@@ -5,9 +5,9 @@ import { Link } from "react-router-dom"
 const Footer = () => {
   return (
     <div className="px-10 text-sm text-gray-300 py-14">
-      <div className="flex justify-between items-center">
+      <div className="flex sm:justify-between sm:items-center flex-wrap">
         <div>
-          <div className="flex flex-row">
+          <div className="flex flex-row flex-wrap mb-1">
             <Link className="mr-4 mb-1" to="/">
               About Nichol+ Hotstar
             </Link>
@@ -30,7 +30,7 @@ const Footer = () => {
           </span>
         </div>
         <div>
-          <p className="mb-2">Connect with me</p>
+          <p className="mt-2 sm:mb-2">Connect with me</p>
           <div className="flex justify-around">
             <a
               target="_blank"

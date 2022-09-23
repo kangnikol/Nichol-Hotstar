@@ -40,35 +40,17 @@ const HeroSlide = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-      {movieItems.map((item, i) => (
-        <TrailerModal key={i} item={item} />
-      ))}
     </div>
   )
 }
 
 const HeroSlideItem = (props) => {
-  let history = useHistory()
   const item = props.item
-  const background = apiConfig.originalImage(
-    item.backdrop_path ? item.backdrop_path : item.poster_path
-  )
-  const setModalActive = async () => {
-    const modal = document.querySelector(`#modal_${item.id}`)
-    const videos = await tmdbApi.getVideos(category.movie, item.id)
-    if (videos.results.length < 1) {
-      modal.querySelector("modal-content").innerHTML = "No Trailer"
-    }
-    const videSrc = "https://www.youtube.com/embed/" + videos.results[0].key
-    modal.querySelector(".modal-content > iframe").setAttribute("src", videSrc)
-
-    modal.classList.toggle("active")
-  }
   return (
-    <div className="p-12">
+    <div className="p-5 sm:p-12">
       <Link to={"/movie/" + item.id}>
         <div className="flex flex-row cursor-pointer">
-          <div className="card bg-black rounded-l-lg p-8 basis-1/2">
+          <div className="card hidden sm:flex sm:flex-col sm:bg-black sm:rounded-l-lg sm:p-8 sm:basis-1/2">
             <h2 className="title text-5xl text-white font-semibold pb-4">
               {item.title}
             </h2>
@@ -76,35 +58,19 @@ const HeroSlideItem = (props) => {
               {item.overview}
             </div>
           </div>
-          <div className="relative basis-1/2 h-full bg-center bg-no-repeat after:content-[''] after:top-0 after:left-0 after:absolute after:w-full after:h-full after:bg-gradient-to-r after:from-black after:to-transparent">
+          <div className="relative sm:basis-1/2 h-full bg-center bg-no-repeat before:content-[''] before:bg-black before:absolute before:opacity-10 before:w-full before:h-full before:top-0 before:left-0 sm:after:content-[''] sm:after:top-0 sm:after:left-0 sm:after:absolute sm:after:w-full sm:after:h-full sm:after:bg-gradient-to-r sm:after:from-black sm:after:to-transparent">
             <img
-              className="rounded-r-lg"
+              className="sm:rounded-r-lg rounded-lg"
               src={apiConfig.originalImage(item.backdrop_path)}
               alt="Poster"
             />
+            <p className="sm:hidden absolute text-4xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+              {item.title}
+            </p>
           </div>
         </div>
       </Link>
     </div>
-  )
-}
-
-const TrailerModal = (props) => {
-  const item = props.item
-
-  const iframeRef = useRef(null)
-  const onClose = () => iframeRef.current.setAttribute("src", "")
-  return (
-    <Modal active={false} id={`modal_${item.id}`}>
-      <ModalContent onClose={onClose}>
-        <iframe
-          ref={iframeRef}
-          width="100%"
-          height="500px"
-          title="trailer"
-        ></iframe>
-      </ModalContent>
-    </Modal>
   )
 }
 
