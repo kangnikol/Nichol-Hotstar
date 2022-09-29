@@ -39,9 +39,9 @@ const Detail = () => {
     <>
       {item && (
         <>
-          <div className="p-5 sm:p-12">
+          <div className="p-5 lg:p-12">
             <div className="flex flex-row">
-              <div className="card hidden sm:flex sm:flex-col sm:bg-black sm:rounded-l-lg sm:p-8 justify-between sm:basis-1/2">
+              <div className="card hidden lg:flex lg:flex-col lg:bg-black lg:rounded-l-lg lg:p-8 justify-between lg:basis-1/2">
                 <div>
                   <h2 className="title text-white text-5xl font-semibold pb-4">
                     {item.title || item.name}
@@ -86,7 +86,7 @@ const Detail = () => {
                   </Button>
                 </div>
               </div>
-              <div className="relative sm:basis-1/2 h-full bg-center bg-no-repeat before:content-[''] before:bg-black before:absolute before:opacity-10 before:w-full before:h-full before:top-0 before:left-0 sm:after:content-[''] sm:after:top-0 sm:after:left-0 sm:after:absolute sm:after:w-full sm:after:h-full sm:after:bg-gradient-to-r sm:after:from-black sm:after:to-transparent">
+              <div className="relative lg:basis-1/2 h-full bg-center bg-no-repeat before:content-[''] before:bg-black before:absolute before:opacity-10 before:w-full before:h-full before:top-0 before:left-0 lg:after:content-[''] lg:after:top-0 lg:after:left-0 lg:after:absolute lg:after:w-full lg:after:h-full lg:after:bg-gradient-to-r lg:after:from-black lg:after:to-transparent">
                 <img
                   className="rounded-r-lg"
                   src={apiConfig.originalImage(item.backdrop_path)}
@@ -97,13 +97,13 @@ const Detail = () => {
           </div>
           <div className="p-12 text-white">
             <div className="section mb-3">
-              <div className="text-2xl">
+              <div className="text-2xl mb-8">
                 <h2>Related</h2>
               </div>
               <VideoList id={item.id} />
             </div>
             <div className="section mb-3">
-              <div className="section-header mb-3 text-2xl">
+              <div className="section-header mb-8 text-2xl">
                 <h2>More Like This</h2>
               </div>
               <MovieList category={category} type="similar" id={item.id} />

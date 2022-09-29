@@ -47,10 +47,10 @@ const HeroSlide = () => {
 const HeroSlideItem = (props) => {
   const item = props.item
   return (
-    <div className="p-5 sm:p-12">
+    <div className="p-5 lg:p-12">
       <Link to={"/movie/" + item.id}>
         <div className="flex flex-row cursor-pointer">
-          <div className="card hidden sm:flex sm:flex-col sm:bg-black sm:rounded-l-lg sm:p-8 sm:basis-1/2">
+          <div className="card hidden lg:flex lg:flex-col lg:bg-black lg:rounded-l-lg lg:p-8 lg:basis-1/2">
             <h2 className="title text-5xl text-white font-semibold pb-4">
               {item.title}
             </h2>
@@ -58,13 +58,13 @@ const HeroSlideItem = (props) => {
               {item.overview}
             </div>
           </div>
-          <div className="relative sm:basis-1/2 h-full bg-center bg-no-repeat before:content-[''] before:bg-black before:absolute before:opacity-10 before:w-full before:h-full before:top-0 before:left-0 sm:after:content-[''] sm:after:top-0 sm:after:left-0 sm:after:absolute sm:after:w-full sm:after:h-full sm:after:bg-gradient-to-r sm:after:from-black sm:after:to-transparent">
+          <div className="relative lg:basis-1/2 h-full bg-center bg-no-repeat before:content-[''] before:bg-black before:absolute before:opacity-10 before:w-full before:h-full before:top-0 before:left-0 lg:after:content-[''] lg:after:top-0 lg:after:left-0 lg:after:absolute lg:after:w-full lg:after:h-full lg:after:bg-gradient-to-r lg:after:from-black lg:after:to-transparent">
             <img
-              className="sm:rounded-r-lg rounded-lg"
+              className="lg:rounded-r-lg rounded-lg"
               src={apiConfig.originalImage(item.backdrop_path)}
               alt="Poster"
             />
-            <p className="sm:hidden absolute text-4xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <p className="lg:hidden absolute text-4xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
               {item.title}
             </p>
           </div>

@@ -2,19 +2,19 @@ import React, { useEffect, useRef } from "react"
 
 const VideoCard = (props) => {
   const item = props.item
-  const iframeRef = useRef(null)
-  useEffect(() => {
-    const height = (iframeRef.current.offsetWitdh * 9) / 16 + "px"
-    iframeRef.current.setAttribute("height", height)
-    const width = (iframeRef.current.offsetWitdh * 9) / 16 + "px"
-    iframeRef.current.setAttribute("width", width)
-  }, [])
+  // const iframeRef = useRef(null)
+  // useEffect(() => {
+  // const height = (iframeRef.current.offsetWitdh * 9) / 16 + "px"
+  // iframeRef.current.setAttribute("height", height)
+  // const width = (iframeRef.current.offsetWitdh * 9) / 16 + "px"
+  // iframeRef.current.setAttribute("width", width)
+  // }, [])
   return (
     <div>
       <iframe
         className="rounded-lg"
         src={`https://www.youtube.com/embed/${item.key}`}
-        ref={iframeRef}
+        // ref={iframeRef}
         width="100%"
         title="video"
       ></iframe>

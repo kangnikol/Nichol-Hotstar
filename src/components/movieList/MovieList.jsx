@@ -32,25 +32,25 @@ const MovieList = (props) => {
   return (
     <div>
       <Swiper
-        className="hidden sm:flex"
+        className="hidden lg:flex"
         grabCursor={true}
         spaceBetween={10}
         slidesPerView={9}
       >
         {Items.map((item, i) => (
-          <SwiperSlide className="w-2/5 sm:w-[15%]" key={i}>
+          <SwiperSlide className="w-2/5 lg:w-[15%]" key={i}>
             <MovieCard item={item} category={props.category} />
           </SwiperSlide>
         ))}
       </Swiper>
       <Swiper
-        className="sm:hidden"
+        className="lg:hidden"
         grabCursor={true}
         spaceBetween={10}
         slidesPerView={2}
       >
         {Items.map((item, i) => (
-          <SwiperSlide className="w-2/5 sm:w-[15%]" key={i}>
+          <SwiperSlide className="w-2/5 lg:w-[15%]" key={i}>
             <MovieCard item={item} category={props.category} />
           </SwiperSlide>
         ))}
