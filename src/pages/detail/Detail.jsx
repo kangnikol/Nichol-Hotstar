@@ -21,6 +21,7 @@ const Detail = () => {
   }, [category, id])
   const setModalActive = async () => {
     const modal = document.querySelector(`#modal_${item.id}`)
+    console.log(modal)
     const videos = await tmdbApi.getVideos(category, item.id)
     if (videos.results.length < 1) {
       modal.querySelector("modal-content").innerHTML = "No Trailer"
@@ -67,10 +68,9 @@ const Detail = () => {
                       ))}
                     {item.spoken_languages.map((lang, i) => (
                       <span className="mr-1" key={i}>
-                        {lang.english_name} ‧
+                        {lang.english_name}
                       </span>
                     ))}
-                    {item.adult === true ? "Adult" : "Kids"}
                   </div>
                   <div className="overview text-white pt-4 flex flex-warp">
                     {item.overview}
@@ -81,7 +81,7 @@ const Detail = () => {
                     className="text-white flex items-center gap-4 text-xl"
                     onClick={setModalActive}
                   >
-                    <i class="fa-solid fa-play text-3xl"></i>
+                    <i className="fa-solid fa-play text-3xl"></i>
                     <span>Watch Trailer</span>
                   </Button>
                 </div>
