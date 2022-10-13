@@ -13,6 +13,7 @@ const MovieList = (props) => {
   const settings = {
     className: "text-white",
     centerMode: true,
+    Infinity: true,
     autoplay: false,
     centerPadding: "60px",
     slidesToShow: 8,
