@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react"
-import { Link, useLocation } from "react-router-dom"
+import { Link } from "react-router-dom"
 // import "./Header.scss"
 import logo from "../../assets/logo1.png"
 

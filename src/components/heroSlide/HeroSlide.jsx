@@ -1,11 +1,10 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useState } from "react"
 import SwiperCore, { Autoplay, Navigation } from "swiper"
-import Modal, { ModalContent } from "../modal/Modal"
 import { Swiper, SwiperSlide } from "swiper/react"
-import tmdbApi, { category, movieType } from "../../api/tmdbApi"
+import tmdbApi, { movieType } from "../../api/tmdbApi"
 import apiConfig from "../../api/apiConfig"
 // import "./HeroSlide.scss"
-import { Link, useHistory } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const HeroSlide = () => {
   SwiperCore.use([Autoplay])
