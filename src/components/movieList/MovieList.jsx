@@ -1,12 +1,31 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 // import "./MovieList.scss"
-import { SwiperSlide, Swiper } from "swiper/react"
 import tmdbApi, { category } from "../../api/tmdbApi"
 import MovieCard from "../movieCard/MovieCard"
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 
 const MovieList = (props) => {
   const [Items, setItems] = useState([])
+
+  const settings = {
+    className: "text-white",
+    centerMode: true,
+    autoplay: false,
+    centerPadding: "60px",
+    slidesToShow: 8,
+    swipeToSlide: false,
+    responsive: [
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+    ],
+  }
 
   useEffect(() => {
     const getList = async () => {
@@ -31,30 +50,13 @@ const MovieList = (props) => {
 
   return (
     <div>
-      <Swiper
-        className="hidden lg:flex"
-        grabCursor={true}
-        spaceBetween={10}
-        slidesPerView={9}
-      >
+      <Slider {...settings}>
         {Items.map((item, i) => (
-          <SwiperSlide className="w-2/5 lg:w-[15%]" key={i}>
+          <div className="w-2/5 lg:w-[15%] px-1" key={i}>
             <MovieCard item={item} category={props.category} />
-          </SwiperSlide>
+          </div>
         ))}
-      </Swiper>
-      <Swiper
-        className="lg:hidden"
-        grabCursor={true}
-        spaceBetween={10}
-        slidesPerView={2}
-      >
-        {Items.map((item, i) => (
-          <SwiperSlide className="w-2/5 lg:w-[15%]" key={i}>
-            <MovieCard item={item} category={props.category} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      </Slider>
     </div>
   )
 }

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import SwiperCore, { Autoplay, Navigation } from "swiper"
-// import Modal, { ModalContent } from "../modal/Modal"
 import { Swiper, SwiperSlide } from "swiper/react"
 import tmdbApi, { movieType } from "../../api/tmdbApi"
 import apiConfig from "../../api/apiConfig"
