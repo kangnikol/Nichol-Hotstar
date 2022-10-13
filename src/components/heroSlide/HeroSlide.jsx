@@ -1,13 +1,23 @@
 import React, { useEffect, useState } from "react"
-import SwiperCore, { Autoplay, Navigation } from "swiper"
-import { Swiper, SwiperSlide } from "swiper/react"
 import tmdbApi, { movieType } from "../../api/tmdbApi"
 import apiConfig from "../../api/apiConfig"
 // import "./HeroSlide.scss"
 import { Link } from "react-router-dom"
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 
 const HeroSlide = () => {
-  SwiperCore.use([Autoplay])
+  const settings = {
+    className: "text-white",
+    centerMode: true,
+    Infinity: true,
+    autoplay: true,
+    centerPadding: "60px",
+    slidesToShow: 1,
+    swipeToSlide: false,
+    speed: 300,
+  }
   const [movieItems, setMovieItems] = useState([])
   useEffect(() => {
     const getMovies = async () => {
@@ -17,28 +27,23 @@ const HeroSlide = () => {
           params,
         })
         setMovieItems(response.results.slice(0, 4))
-        console.log(response)
+        console.log("OK!")
       } catch {
-        console.log("error")
+        console.log("Error")
       }
     }
     getMovies()
   }, [])
 
   return (
-    <div className="hero-slide mb-12">
-      <Swiper modules={[Navigation]} spaceBetween={0} slidesPerView={1}>
+    <div>
+      <Slider {...settings}>
         {movieItems.map((item, i) => (
-          <SwiperSlide key={i}>
-            {({ isActive }) => (
-              <HeroSlideItem
-                item={item}
-                className={`${isActive ? "active" : ""}`}
-              />
-            )}
-          </SwiperSlide>
+          <div key={i}>
+            <HeroSlideItem item={item} />
+          </div>
         ))}
-      </Swiper>
+      </Slider>
     </div>
   )
 }
@@ -46,7 +51,7 @@ const HeroSlide = () => {
 const HeroSlideItem = (props) => {
   const item = props.item
   return (
-    <div className="p-5 lg:p-12">
+    <div className="p-4 lg:p-7">
       <Link to={"/movie/" + item.id}>
         <div className="flex flex-row cursor-pointer">
           <div className="card hidden lg:flex lg:flex-col lg:bg-black lg:rounded-l-lg lg:p-8 lg:basis-1/2">
