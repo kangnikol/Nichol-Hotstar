@@ -1,10 +1,27 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { Swiper, SwiperSlide } from "swiper/react"
 import tmdbApi from "../../api/tmdbApi"
 import VideoCard from "./VideoCard"
+import Slider from "react-slick"
 
 const VideoList = (props) => {
+  const settings = {
+    className: "text-white",
+    centerMode: true,
+    Infinity: true,
+    autoplay: false,
+    centerPadding: "60px",
+    slidesToShow: 8,
+    swipeToSlide: false,
+    responsive: [
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+    ],
+  }
   const { category } = useParams()
   const [videos, setVideos] = useState([])
   useEffect(() => {
@@ -16,30 +33,13 @@ const VideoList = (props) => {
   }, [category, props.id])
   return (
     <>
-      <Swiper
-        className="hidden lg:flex"
-        grabCursor={true}
-        spaceBetween={10}
-        slidesPerView={9}
-      >
+      <Slider {...settings}>
         {videos.map((item, i) => (
-          <SwiperSlide key={i}>
+          <div key={i}>
             <VideoCard item={item} />
-          </SwiperSlide>
+          </div>
         ))}
-      </Swiper>
-      <Swiper
-        className="lg:hidden"
-        grabCursor={true}
-        spaceBetween={10}
-        slidesPerView={2}
-      >
-        {videos.map((item, i) => (
-          <SwiperSlide key={i}>
-            <VideoCard item={item} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      </Slider>
     </>
   )
 }
