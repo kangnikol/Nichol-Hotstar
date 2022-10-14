@@ -4,8 +4,6 @@ import PropTypes from "prop-types"
 import tmdbApi, { category } from "../../api/tmdbApi"
 import MovieCard from "../movieCard/MovieCard"
 import Slider from "react-slick"
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
 
 const MovieList = (props) => {
   const [Items, setItems] = useState([])
