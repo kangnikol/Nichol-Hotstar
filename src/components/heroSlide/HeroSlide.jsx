@@ -14,7 +14,8 @@ const HeroSlide = () => {
     centerPadding: "60px",
     slidesToShow: 1,
     swipeToSlide: false,
-    speed: 300,
+    arrows: false,
+    speed: 500,
   }
   const [movieItems, setMovieItems] = useState([])
   useEffect(() => {
@@ -66,7 +67,7 @@ const HeroSlideItem = (props) => {
               src={apiConfig.originalImage(item.backdrop_path)}
               alt="Poster"
             />
-            <p className="lg:hidden absolute text-4xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <p className="lg:hidden text-center text-xl text-white">
               {item.title}
             </p>
           </div>

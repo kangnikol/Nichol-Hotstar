@@ -11,14 +11,13 @@ const MovieList = (props) => {
   const settings = {
     className: "text-white",
     centerMode: true,
-    Infinity: true,
     autoplay: false,
     centerPadding: "60px",
     slidesToShow: 8,
     swipeToSlide: false,
     responsive: [
       {
-        breakpoint: 600,
+        breakpoint: 400,
         settings: {
           slidesToShow: 2,
         },

@@ -32,15 +32,22 @@ const Footer = () => {
         <div>
           <p className="mt-2 lg:mb-2">Connect with me</p>
           <div className="flex justify-around">
+            <a target="_blank" rel="noreferrer" href="https://kangnikol.xyz">
+              <i className="fa-solid fa-code text-2xl"></i>
+            </a>
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://linkedin.com/in/nicholasalvis_"
+            >
+              <i className="fa-brands fa-linkedin text-2xl"></i>
+            </a>
             <a
               target="_blank"
               rel="noreferrer"
               href="https://github.com/kangnikol"
             >
-              <i className="fa-brands fa-github text-4xl"></i>
-            </a>
-            <a target="_blank" rel="noreferrer" href="https://kangnikol.xyz">
-              <i className="fa-solid fa-code text-4xl"></i>
+              <i className="fa-brands fa-github text-2xl"></i>
             </a>
           </div>
         </div>
