@@ -7,21 +7,12 @@ import Slider from "react-slick"
 const VideoList = (props) => {
   const settings = {
     className: "text-white",
-    centerMode: true,
-    Infinity: true,
+    infinite: false,
     autoplay: false,
-    centerPadding: "60px",
-    slidesToShow: 8,
-    swipeToSlide: false,
-    responsive: [
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-    ],
+    slidesToShow: 5,
+    slidesToScroll: 5,
   }
+
   const { category } = useParams()
   const [videos, setVideos] = useState([])
   useEffect(() => {

@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <>
       <HeroSlide />
-      <div className="lg:container mx-auto px-4 h-max">
+      <div className="px-10 h-max">
         <div className="section mb-3">
           <div className="section-header mb-8 flex justify-between items-center">
             <h2 className="text-white text-2xl">Trending Movies</h2>

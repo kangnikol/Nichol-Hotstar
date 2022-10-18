@@ -3,9 +3,9 @@ import React from "react"
 
 const Input = (props) => {
   return (
-    <div className="text-center">
+    <div className="text-center px-10">
       <input
-        className="border-0 bg-black px-6 py-3 rounded-full text-white"
+        className="border-0 bg-black px-6 py-3 rounded-full text-white text-center"
         type={props.type}
         placeholder={props.placeholder}
         value={props.value}

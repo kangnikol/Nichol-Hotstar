@@ -71,10 +71,10 @@ const MovieGrid = (props) => {
   }
   return (
     <>
-      <div className="section mb-12 container mx-auto">
+      <div className="section mb-12">
         <MovieSearch category={props.category} keyword={keyword} />
       </div>
-      <div className="container mx-auto grid grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] gap-5 mb-12">
+      <div className="px-10 grid grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] gap-5 mb-12">
         {items.map((item, i) => (
           <MovieCard category={props.category} item={item} key={i} />
         ))}
