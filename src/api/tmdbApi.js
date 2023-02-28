@@ -18,12 +18,6 @@ export const tvType = {
   on_the_air: "on_the_air",
 }
 
-export const kidsType = {
-  popular: "popular",
-  top_rated: "top_rated",
-  upcoming: "upcoming",
-}
-
 const tmdbApi = {
   getMovieList: (type, params) => {
     const url = "movie/" + movieType[type]
