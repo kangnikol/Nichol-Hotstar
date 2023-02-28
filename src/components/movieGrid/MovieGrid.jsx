@@ -8,7 +8,6 @@ import tmdbApi, {
   category,
   movieType,
   tvType,
-  kidsType,
 } from "../../api/tmdbApi"
 
 const MovieGrid = (props) => {
