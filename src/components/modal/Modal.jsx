@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
 import PropTypes from "prop-types"
-// import "./Modal.scss"
+import "./Modal.scss"
 
 const Modal = (props) => {
   const [active, setActive] = useState(false)
@@ -35,7 +35,7 @@ export const ModalContent = (props) => {
   return (
     <div
       ref={contentRef}
-      className="p-8 bg-gray-900 w-1/2 transform -translate-y-64 [transition:_transform_0.6s_ease,_opacity_0.6s_ease] relative"
+      className="modal-content p-8 bg-gray-900 w-1/2 transform -translate-y-64 [transition:_transform_0.6s_ease,_opacity_0.6s_ease] relative"
     >
       {props.children}
       <div className="modal-content-close" onClick={closeModal}>

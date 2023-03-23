@@ -1,14 +1,14 @@
 import "./App.css"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
-import { BrowserRouter, Route } from "react-router-dom"
+import { BrowserRouter as Router, Route } from "react-router-dom"
 import Header from "./components/header/Header"
 import Footer from "./components/footer/Footer"
 import Routes from "./config/Routes"
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Route
         render={(props) => (
           <>
@@ -20,7 +20,7 @@ function App() {
           </>
         )}
       />
-    </BrowserRouter>
+    </Router>
   )
 }
 

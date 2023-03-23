@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
 import apiConfig from "../../api/apiConfig"
-import tmdbApi from "../../api/tmdbApi"
+import tmdbApi, { category as cate } from "../../api/tmdbApi"
 import VideoList from "./VideoList"
 import MovieList from "../../components/movieList/MovieList"
 import moment from "moment/moment"
@@ -21,13 +21,17 @@ const Detail = () => {
   }, [category, id])
   const setModalActive = async () => {
     const modal = document.querySelector(`#modal_${item.id}`)
-    console.log(modal)
-    const videos = await tmdbApi.getVideos(category, item.id)
-    if (videos.results.length < 1) {
-      modal.querySelector("modal-content").innerHTML = "No Trailer"
+
+    const videos = await tmdbApi.getVideos(cate.movie, item.id)
+
+    if (videos.results.length > 0) {
+      const videSrc = "https://www.youtube.com/embed/" + videos.results[0].key
+      modal
+        .querySelector(".modal-content > iframe")
+        .setAttribute("src", videSrc)
+    } else {
+      modal.querySelector(".modal-content").innerHTML = "No trailer"
     }
-    const videSrc = "https://www.youtube.com/embed/" + videos.results[0].key
-    modal.querySelector(".modal-content > iframe").setAttribute("src", videSrc)
 
     modal.classList.toggle("active")
   }
@@ -120,9 +124,11 @@ const TrailerModal = (props) => {
   const item = props.item
 
   const iframeRef = useRef(null)
-  const onClose = () => iframeRef.current.setAttribute("src", "")
+  function onClose() {
+    return iframeRef.current.setAttribute("src", "")
+  }
   return (
-    <Modal active={false} id={`modal_${item.id}`}>
+    <Modal active={false} id={`modal_${item}`}>
       <ModalContent onClose={onClose}>
         <iframe
           ref={iframeRef}
