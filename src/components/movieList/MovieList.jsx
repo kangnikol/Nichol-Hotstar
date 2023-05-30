@@ -9,17 +9,16 @@ const MovieList = (props) => {
   const [Items, setItems] = useState([])
 
   const settings = {
-    className: "text-white",
     centerMode: true,
     autoplay: false,
-    centerPadding: "60px",
-    slidesToShow: 8,
+    centerPadding: "20px",
+    slidesToShow: 5,
     swipeToSlide: false,
     responsive: [
       {
-        breakpoint: 400,
+        breakpoint: 1080,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 3,
         },
       },
     ],

@@ -30,7 +30,7 @@ const Detail = () => {
         .querySelector(".modal-content > iframe")
         .setAttribute("src", videSrc)
     } else {
-      modal.querySelector(".modal-content").innerHTML = "No trailer"
+      modal.querySelector(".modal-content > iframe").innerHTML = "No trailer"
     }
 
     modal.classList.toggle("active")
