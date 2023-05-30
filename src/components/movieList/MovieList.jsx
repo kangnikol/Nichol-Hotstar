@@ -12,7 +12,7 @@ const MovieList = (props) => {
     centerMode: true,
     autoplay: false,
     centerPadding: "20px",
-    slidesToShow: 5,
+    slidesToShow: 7,
     swipeToSlide: false,
     responsive: [
       {
