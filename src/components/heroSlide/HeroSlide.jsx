@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import tmdbApi, { movieType } from "../../api/tmdbApi"
 import apiConfig from "../../api/apiConfig"
-// import "./HeroSlide.scss"
 import { Link } from "react-router-dom"
 import Slider from "react-slick"
 

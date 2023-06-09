@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { Fragment, useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
 import apiConfig from "../../api/apiConfig"
 import tmdbApi, { category as cate } from "../../api/tmdbApi"
@@ -6,40 +6,55 @@ import VideoList from "./VideoList"
 import MovieList from "../../components/movieList/MovieList"
 import moment from "moment/moment"
 import Button from "../../components/button/Button"
-import Modal, { ModalContent } from "../../components/modal/Modal"
+import { Dialog, Transition } from "@headlessui/react"
 
 const Detail = () => {
   const { category, id } = useParams()
   const [item, setItem] = useState(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const modalRef = useRef(null)
+  const iframeRef = useRef(null)
+
   useEffect(() => {
     const getDetail = async () => {
       const response = await tmdbApi.detail(category, id, { params: {} })
       setItem(response)
       window.scrollTo(0, 0)
     }
+
     getDetail()
   }, [category, id])
-  const setModalActive = async () => {
-    const modal = document.querySelector(`#modal_${item.id}`)
 
-    const videos = await tmdbApi.getVideos(cate.movie, item.id)
+  useEffect(() => {
+    const setModalContent = async () => {
+      if (item) {
+        const videos = await tmdbApi.getVideos(cate.movie, item.id)
 
-    if (videos.results.length > 0) {
-      const videSrc = "https://www.youtube.com/embed/" + videos.results[0].key
-      modal
-        .querySelector(".modal-content > iframe")
-        .setAttribute("src", videSrc)
-    } else {
-      modal.querySelector(".modal-content > iframe").innerHTML = "No trailer"
+        if (videos.results.length > 0) {
+          const videoSrc =
+            "https://www.youtube.com/embed/" + videos.results[0].key
+          iframeRef.current.setAttribute("src", videoSrc)
+        } else {
+          iframeRef.current.innerHTML = "No trailer"
+        }
+      }
     }
 
-    modal.classList.toggle("active")
+    if (isModalOpen && item) {
+      setModalContent()
+    }
+  }, [isModalOpen, item])
+
+  const openModal = () => {
+    setIsModalOpen(true)
   }
+
   const time_convert = (num) => {
     const hours = Math.floor(num / 60)
     const minutes = num % 60
     return hours + " hr " + minutes + " min"
   }
+
   return (
     <>
       {item && (
@@ -72,7 +87,7 @@ const Detail = () => {
                       ))}
                     {item.spoken_languages.map((lang, i) => (
                       <span className="mr-1" key={i}>
-                        {lang.english_name}
+                        {lang.english_name},
                       </span>
                     ))}
                   </div>
@@ -83,7 +98,7 @@ const Detail = () => {
                 <div>
                   <Button
                     className="text-white flex items-center gap-4 text-xl"
-                    onClick={setModalActive}
+                    onClick={openModal}
                   >
                     <i className="fa-solid fa-play text-3xl"></i>
                     <span>Watch Trailer</span>
@@ -112,7 +127,13 @@ const Detail = () => {
               </div>
               <MovieList category={category} type="similar" id={item.id} />
             </div>
-            <TrailerModal item={item.id} />
+            <TrailerDialog
+              isOpen={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
+              item={item.id}
+              ref={modalRef}
+              iframeRef={iframeRef}
+            />
           </div>
         </>
       )}
@@ -120,25 +141,84 @@ const Detail = () => {
   )
 }
 
-const TrailerModal = (props) => {
-  const item = props.item
+const TrailerDialog = React.forwardRef(
+  ({ isOpen, onClose, item, iframeRef }, ref) => {
+    useEffect(() => {
+      const setModalContent = async () => {
+        if (item) {
+          const videos = await tmdbApi.getVideos(cate.movie, item.id)
 
-  const iframeRef = useRef(null)
-  function onClose() {
-    return iframeRef.current.setAttribute("src", "")
+          if (videos.results.length > 0) {
+            const videoSrc =
+              "https://www.youtube.com/embed/" + videos.results[0].key
+            iframeRef.current.src = videoSrc
+          } else {
+            iframeRef.current.src = ""
+          }
+        }
+      }
+
+      if (isOpen && item) {
+        setModalContent()
+      }
+    }, [isOpen, item, iframeRef])
+
+    return (
+      <Transition appear show={isOpen} as={Fragment}>
+        <Dialog
+          as="div"
+          className="relative z-50"
+          open={isOpen}
+          onClose={onClose}
+          ref={ref}
+          id={item.id}
+        >
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-300"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black bg-opacity-25" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-1/2 h-1/2 transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                  <Dialog.Title
+                    as="h3"
+                    className="text-lg text-center pb-4 font-medium leading-6 text-gray-900"
+                  >
+                    Movies Trailer
+                  </Dialog.Title>
+                  <div className="bg-white border rounded-lg p-8 w-full">
+                    <iframe
+                      ref={iframeRef}
+                      width="100%"
+                      height="250px"
+                      title="trailer"
+                    ></iframe>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+    )
   }
-  return (
-    <Modal active={false} id={`modal_${item}`}>
-      <ModalContent onClose={onClose}>
-        <iframe
-          ref={iframeRef}
-          width="100%"
-          height="500px"
-          title="trailer"
-        ></iframe>
-      </ModalContent>
-    </Modal>
-  )
-}
+)
 
 export default Detail
