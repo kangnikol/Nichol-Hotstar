@@ -1,5 +1,4 @@
 import React from "react"
-// import "./PageHeader.scss"
 
 const pageHeader = (props) => {
   return (

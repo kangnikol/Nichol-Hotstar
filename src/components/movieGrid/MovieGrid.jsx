@@ -1,14 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react"
 import { useHistory, useParams } from "react-router-dom"
-// import "./MovieGrid.scss"
 import MovieCard from "../movieCard/MovieCard"
 import { OutlineButton } from "../button/Button"
 import Input from "../input/Input"
-import tmdbApi, {
-  category,
-  movieType,
-  tvType,
-} from "../../api/tmdbApi"
+import tmdbApi, { category, movieType, tvType } from "../../api/tmdbApi"
 
 const MovieGrid = (props) => {
   const [items, setItems] = useState([])

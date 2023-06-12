@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
-// import "./MovieList.scss"
 import tmdbApi, { category } from "../../api/tmdbApi"
 import MovieCard from "../movieCard/MovieCard"
 import Slider from "react-slick"
